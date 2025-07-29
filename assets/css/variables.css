@@ -1,0 +1,133 @@
+/* List Kamba - Design Tokens */
+/* Angola-inspired color palette */
+
+:root {
+  /* Primary colors - Angola flag inspired */
+  --primary-light: #4A90E2;      /* Light blue */
+  --primary-medium: #2F5F8F;     /* Medium blue */
+  --primary-dark: #1A365D;       /* Dark blue */
+  
+  /* Angola flag colors */
+  --angola-red: #CE1126;         /* Red from flag */
+  --angola-black: #000000;       /* Black from flag */
+  --angola-gold: #FFD700;        /* Yellow/gold from flag */
+  
+  /* Light theme */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #E2E8F0;
+  --text-primary: #1A202C;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --border-color: #E2E8F0;
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Status colors */
+  --success: #27AE60;            /* Green */
+  --warning: #F39C12;            /* Orange/yellow */
+  --danger: #E74C3C;             /* Red */
+  --info: var(--primary-light);
+  
+  /* Typography */
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+  
+  --font-size-xs: 0.75rem;       /* 12px */
+  --font-size-sm: 0.875rem;      /* 14px */
+  --font-size-base: 1rem;        /* 16px */
+  --font-size-lg: 1.125rem;      /* 18px */
+  --font-size-xl: 1.25rem;       /* 20px */
+  --font-size-2xl: 1.5rem;       /* 24px */
+  --font-size-3xl: 1.875rem;     /* 30px */
+  --font-size-4xl: 2.25rem;      /* 36px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.75;
+  
+  /* Spacing */
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  
+  /* Border radius */
+  --radius-sm: 0.125rem;   /* 2px */
+  --radius-base: 0.25rem;  /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-full: 50%;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+  
+  /* Z-index scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg-primary: #0F2027;         /* Very dark blue */
+  --bg-secondary: #203A43;       /* Dark blue secondary */
+  --bg-tertiary: #2C5F66;        /* Dark blue accent */
+  --text-primary: #F7FAFC;       /* Light text */
+  --text-secondary: #E2E8F0;     /* Secondary light text */
+  --text-muted: #A0AEC0;         /* Muted light text */
+  --border-color: #4A5568;       /* Dark border */
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-heavy: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Breakpoints */
+@custom-media --screen-sm (min-width: 640px);
+@custom-media --screen-md (min-width: 768px);
+@custom-media --screen-lg (min-width: 1024px);
+@custom-media --screen-xl (min-width: 1280px);
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --border-color: #000000;
+    --text-secondary: var(--text-primary);
+  }
+  
+  [data-theme="dark"] {
+    --border-color: #FFFFFF;
+    --text-secondary: var(--text-primary);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+}
