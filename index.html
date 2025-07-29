@@ -35,7 +35,7 @@
         <header class="app-header">
             <div class="container">
                 <div class="header-content">
-                    <a href="/" class="logo">
+                    <a href="#" class="logo" data-page="dashboard">
                         <div class="logo-icon">LK</div>
                         <span>List Kamba</span>
                     </a>
@@ -351,17 +351,21 @@
     <div id="toastContainer" class="toast-container"></div>
 
     <!-- Scripts -->
+    <script src="assets/js/url-fix.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/storage.js"></script>
     <script src="assets/js/tasks.js"></script>
     <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/router.js"></script>
     <script src="assets/js/app.js"></script>
     
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                // Use relative path for service worker registration
+                const swPath = window.URLFix ? window.URLFix.resolvePath('./service-worker.js') : './service-worker.js';
+                navigator.serviceWorker.register(swPath)
                     .then(registration => {
                         console.log('SW registered: ', registration);
                     })

@@ -1,54 +1,91 @@
 /**
  * List Kamba - Service Worker
  * Handles offline functionality, caching, and background sync
+ * Updated for GitHub Pages compatibility with dynamic base paths
  */
 
-const CACHE_NAME = 'list-kamba-v1.0.0';
+const CACHE_NAME = 'list-kamba-v1.0.1';
 const STATIC_CACHE = `${CACHE_NAME}-static`;
 const DYNAMIC_CACHE = `${CACHE_NAME}-dynamic`;
 const RUNTIME_CACHE = `${CACHE_NAME}-runtime`;
 
-// Files to cache immediately (App Shell)
-const STATIC_FILES = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/assets/css/variables.css',
-  '/assets/css/base.css',
-  '/assets/css/components.css',
-  '/assets/css/themes.css',
-  '/assets/css/animations.css',
-  '/assets/js/utils.js',
-  '/assets/js/storage.js',
-  '/assets/js/tasks.js',
-  '/assets/js/notifications.js',
-  '/assets/js/app.js',
-  '/assets/icons/icon-192x192.png',
-  '/assets/icons/icon-512x512.png'
+// Detect base path for GitHub Pages
+function getBasePath() {
+  const location = self.location;
+  const path = location.pathname;
+  
+  // Check if we're on GitHub Pages
+  if (location.hostname.includes('github.io')) {
+    const pathParts = path.split('/').filter(part => part);
+    if (pathParts.length > 0) {
+      return `/${pathParts[0]}/`;
+    }
+  }
+  
+  return '/';
+}
+
+const BASE_PATH = getBasePath();
+
+// Helper function to resolve paths with base
+function resolvePath(path) {
+  if (path.startsWith('./')) {
+    return BASE_PATH + path.substring(2);
+  }
+  if (path.startsWith('/') && BASE_PATH !== '/') {
+    return BASE_PATH + path.substring(1);
+  }
+  return path;
+}
+
+// Files to cache immediately (App Shell) - using relative paths
+const STATIC_FILES_RELATIVE = [
+  './',
+  './index.html',
+  './manifest.json',
+  './assets/css/variables.css',
+  './assets/css/base.css',
+  './assets/css/components.css',
+  './assets/css/themes.css',
+  './assets/css/animations.css',
+  './assets/js/utils.js',
+  './assets/js/storage.js',
+  './assets/js/tasks.js',
+  './assets/js/notifications.js',
+  './assets/js/app.js',
+  './assets/js/url-fix.js',
+  './assets/js/router.js',
+  './assets/icons/icon-192x192.png',
+  './assets/icons/icon-512x512.png'
 ];
 
+// Convert relative paths to absolute with base path
+const STATIC_FILES = STATIC_FILES_RELATIVE.map(path => resolvePath(path));
+
 // Files to cache dynamically (optional)
-const DYNAMIC_FILES = [
-  '/pages/tasks.html',
-  '/pages/calendar.html',
-  '/pages/timer.html',
-  '/pages/analytics.html',
-  '/pages/settings.html'
+const DYNAMIC_FILES_RELATIVE = [
+  './pages/tasks.html',
+  './pages/calendar.html',
+  './pages/timer.html',
+  './pages/analytics.html',
+  './pages/settings.html'
 ];
+
+const DYNAMIC_FILES = DYNAMIC_FILES_RELATIVE.map(path => resolvePath(path));
 
 // Network-first routes (always try network first)
 const NETWORK_FIRST_ROUTES = [
-  '/api/',
-  '/sync/',
-  '/analytics/'
+  `${BASE_PATH}api/`,
+  `${BASE_PATH}sync/`,
+  `${BASE_PATH}analytics/`
 ];
 
 // Cache-first routes (serve from cache, fallback to network)
 const CACHE_FIRST_ROUTES = [
-  '/assets/',
-  '/icons/',
-  '/images/',
-  '/sounds/'
+  `${BASE_PATH}assets/`,
+  `${BASE_PATH}icons/`,
+  `${BASE_PATH}images/`,
+  `${BASE_PATH}sounds/`
 ];
 
 // Install event - cache static files
@@ -192,11 +229,11 @@ async function handleOfflineRequest(request) {
   // For navigation requests, return the app shell
   if (request.mode === 'navigate') {
     const cache = await caches.open(STATIC_CACHE);
-    return cache.match('/index.html') || cache.match('/');
+    return cache.match(resolvePath('./index.html')) || cache.match(resolvePath('./'));
   }
   
   // For API requests, return offline response
-  if (url.pathname.startsWith('/api/')) {
+  if (url.pathname.startsWith(`${BASE_PATH}api/`)) {
     return new Response(
       JSON.stringify({
         error: 'offline',
