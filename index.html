@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="List Kamba - Aplicação de gestão de tarefas desenvolvida especialmente para Angola. Organize suas tarefas, compromissos e metas de forma simples e eficiente.">
+    <meta name="theme-color" content="#2F5F8F">
+    <meta name="author" content="List Kamba Team">
+    <meta name="keywords" content="tarefas, agenda, Angola, produtividade, organização, gestão">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="List Kamba">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
+    <title>List Kamba - Gestão de Tarefas para Angola</title>
+</head>
+<body data-theme="light">
+    <!-- App Layout -->
+    <div class="app-layout">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="/" class="logo">
+                        <div class="logo-icon">LK</div>
+                        <span>List Kamba</span>
+                    </a>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="nav-desktop">
+                        <ul class="nav-menu" id="navMenu">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active" data-page="dashboard">
+                                    <span>📊</span>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-page="tasks">
+                                    <span>✅</span>
+                                    Tarefas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-page="calendar">
+                                    <span>📅</span>
+                                    Calendário
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-page="timer">
+                                    <span>⏰</span>
+                                    Cronómetro
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-page="analytics">
+                                    <span>📈</span>
+                                    Estatísticas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-page="settings">
+                                    <span>⚙️</span>
+                                    Configurações
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menu">
+                        <span>☰</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Dashboard View -->
+                <div id="dashboard" class="view active">
+                    <div style="margin-bottom: var(--space-6);">
+                        <h1>Bem-vindo ao List Kamba</h1>
+                        <p>Organize suas tarefas e metas de forma simples e eficiente. Desenvolvido especialmente para Angola.</p>
+                    </div>
+
+                    <!-- Dashboard Cards -->
+                    <div class="dashboard-grid">
+                        <!-- Tasks Summary -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Tarefas de Hoje</h3>
+                                <p class="card-subtitle">Resumo das suas atividades</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <div class="stat-number" id="todayTasks">0</div>
+                                        <div class="stat-label">Total</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number" id="completedTasks">0</div>
+                                        <div class="stat-label">Concluídas</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-number" id="pendingTasks">0</div>
+                                        <div class="stat-label">Pendentes</div>
+                                    </div>
+                                </div>
+                                <div class="progress" style="margin-top: var(--space-4);">
+                                    <div class="progress-bar" id="todayProgress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary" onclick="showView('tasks')">
+                                    Ver Todas as Tarefas
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Ações Rápidas</h3>
+                                <p class="card-subtitle">Acesso direto às funcionalidades</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="quick-actions">
+                                    <button class="btn btn-secondary btn-block" onclick="createNewTask()">
+                                        <span>✏️</span>
+                                        Nova Tarefa
+                                    </button>
+                                    <button class="btn btn-secondary btn-block" onclick="showView('timer')">
+                                        <span>⏰</span>
+                                        Iniciar Pomodoro
+                                    </button>
+                                    <button class="btn btn-secondary btn-block" onclick="showView('calendar')">
+                                        <span>📅</span>
+                                        Ver Calendário
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Atividade Recente</h3>
+                                <p class="card-subtitle">Últimas ações realizadas</p>
+                            </div>
+                            <div class="card-body">
+                                <div id="recentActivity" class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon">📝</div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Bem-vindo ao List Kamba!</div>
+                                            <div class="activity-time">Agora mesmo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Productivity Stats -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Produtividade Semanal</h3>
+                                <p class="card-subtitle">Seu desempenho esta semana</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="productivity-chart" id="weeklyChart">
+                                    <div class="chart-placeholder">
+                                        <span>📊</span>
+                                        <p>Gráfico será exibido conforme você usar o aplicativo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-ghost" onclick="showView('analytics')">
+                                    Ver Relatório Completo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tasks View (Initially Hidden) -->
+                <div id="tasks" class="view">
+                    <div style="margin-bottom: var(--space-6);">
+                        <h1>Gestão de Tarefas</h1>
+                        <p>Organize e gerencie todas as suas atividades diárias.</p>
+                    </div>
+                    
+                    <div class="tasks-container">
+                        <div class="tasks-header">
+                            <button class="btn btn-primary" onclick="createNewTask()">
+                                <span>✏️</span>
+                                Nova Tarefa
+                            </button>
+                            <div class="tasks-filters">
+                                <select class="form-control" id="taskFilter">
+                                    <option value="all">Todas as tarefas</option>
+                                    <option value="pending">Pendentes</option>
+                                    <option value="completed">Concluídas</option>
+                                    <option value="today">Hoje</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="tasksList" class="tasks-list">
+                            <!-- Tasks will be dynamically loaded here -->
+                            <div class="empty-state">
+                                <span class="empty-icon">📝</span>
+                                <h3>Nenhuma tarefa encontrada</h3>
+                                <p>Crie sua primeira tarefa para começar a organizar seu dia!</p>
+                                <button class="btn btn-primary" onclick="createNewTask()">Criar Primeira Tarefa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other views will be loaded dynamically -->
+                <div id="calendar" class="view">
+                    <h1>Calendário</h1>
+                    <p>Visualize seus compromissos e tarefas agendadas.</p>
+                    <div class="calendar-placeholder">Em desenvolvimento...</div>
+                </div>
+
+                <div id="timer" class="view">
+                    <h1>Cronómetro Pomodoro</h1>
+                    <p>Use a técnica Pomodoro para aumentar sua produtividade.</p>
+                    <div class="timer-placeholder">Em desenvolvimento...</div>
+                </div>
+
+                <div id="analytics" class="view">
+                    <h1>Estatísticas</h1>
+                    <p>Acompanhe seu progresso e produtividade ao longo do tempo.</p>
+                    <div class="analytics-placeholder">Em desenvolvimento...</div>
+                </div>
+
+                <div id="settings" class="view">
+                    <h1>Configurações</h1>
+                    <p>Personalize o aplicativo conforme suas preferências.</p>
+                    
+                    <div class="settings-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Aparência</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">Tema</label>
+                                    <select class="form-control" id="themeSelector">
+                                        <option value="light">Claro</option>
+                                        <option value="dark">Escuro</option>
+                                        <option value="auto">Automático</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Notificações</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input type="checkbox" id="enableNotifications" class="form-check-input">
+                                    <label for="enableNotifications" class="form-check-label">
+                                        Ativar notificações
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taskModalTitle">Nova Tarefa</h2>
+                <button class="modal-close" onclick="closeTaskModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="taskForm">
+                    <div class="form-group">
+                        <label for="taskTitle" class="form-label">Título *</label>
+                        <input type="text" id="taskTitle" class="form-control" required placeholder="Digite o título da tarefa">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskDescription" class="form-label">Descrição</label>
+                        <textarea id="taskDescription" class="form-control" placeholder="Descreva os detalhes da tarefa (opcional)"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskCategory" class="form-label">Categoria</label>
+                        <select id="taskCategory" class="form-control">
+                            <option value="pessoal">Pessoal</option>
+                            <option value="trabalho">Trabalho</option>
+                            <option value="familia">Família</option>
+                            <option value="saude">Saúde</option>
+                            <option value="financas">Finanças</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskPriority" class="form-label">Prioridade</label>
+                        <select id="taskPriority" class="form-control">
+                            <option value="baixa">Baixa</option>
+                            <option value="media" selected>Média</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskDueDate" class="form-label">Data de vencimento</label>
+                        <input type="date" id="taskDueDate" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeTaskModal()">Cancelar</button>
+                <button type="submit" form="taskForm" class="btn btn-primary">Salvar Tarefa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/tasks.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/app.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
