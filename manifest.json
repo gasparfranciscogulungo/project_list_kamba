@@ -2,12 +2,12 @@
   "name": "List Kamba",
   "short_name": "ListKamba",
   "description": "Aplicação de gestão de tarefas desenvolvida especialmente para Angola. Organize suas tarefas, compromissos e metas de forma simples e eficiente.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0F2027",
   "theme_color": "#2F5F8F",
   "orientation": "portrait",
-  "scope": "/",
+  "scope": "./",
   "lang": "pt-AO",
   "dir": "ltr",
   "categories": ["productivity", "lifestyle", "utilities"],
@@ -66,10 +66,10 @@
       "name": "Nova Tarefa",
       "short_name": "Nova",
       "description": "Criar uma nova tarefa rapidamente",
-      "url": "/?action=new-task",
+      "url": "./?action=new-task",
       "icons": [
         {
-          "src": "assets/icons/shortcut-new-task.png",
+          "src": "assets/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
@@ -78,10 +78,10 @@
       "name": "Cronómetro",
       "short_name": "Timer",
       "description": "Iniciar sessão Pomodoro",
-      "url": "/?action=timer",
+      "url": "./?action=timer",
       "icons": [
         {
-          "src": "assets/icons/shortcut-timer.png",
+          "src": "assets/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
@@ -90,29 +90,13 @@
       "name": "Calendário",
       "short_name": "Agenda",
       "description": "Ver compromissos do dia",
-      "url": "/?action=calendar",
+      "url": "./?action=calendar",
       "icons": [
         {
-          "src": "assets/icons/shortcut-calendar.png",
+          "src": "assets/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "assets/images/screenshot-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Dashboard principal do List Kamba"
-    },
-    {
-      "src": "assets/images/screenshot-mobile.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Interface móvel do List Kamba"
     }
   ],
   "related_applications": [],
@@ -120,7 +104,7 @@
   "protocol_handlers": [
     {
       "protocol": "web+listkamba",
-      "url": "/?task=%s"
+      "url": "./?task=%s"
     }
   ]
 }
