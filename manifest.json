@@ -69,7 +69,7 @@
       "url": "./?action=new-task",
       "icons": [
         {
-          "src": "assets/icons/shortcut-new-task.png",
+          "src": "assets/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
@@ -81,7 +81,7 @@
       "url": "./?action=timer",
       "icons": [
         {
-          "src": "assets/icons/shortcut-timer.png",
+          "src": "assets/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
@@ -93,26 +93,10 @@
       "url": "./?action=calendar",
       "icons": [
         {
-          "src": "assets/icons/shortcut-calendar.png",
+          "src": "assets/icons/icon-96x96.png",
           "sizes": "96x96"
         }
       ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "assets/images/screenshot-desktop.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Dashboard principal do List Kamba"
-    },
-    {
-      "src": "assets/images/screenshot-mobile.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Interface móvel do List Kamba"
     }
   ],
   "related_applications": [],
