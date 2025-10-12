@@ -169,6 +169,7 @@ O List Kamba é um PWA completo que oferece:
 - Mobile (Android, iOS)
 - Tablets
 - Otimizado para dispositivos de baixo custo
+- link em deploy:  https://gasparfranciscogulungo.github.io/project_list_kamba/
 
 ## 🤝 Contribuição
 
